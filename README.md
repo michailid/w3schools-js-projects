@@ -1,0 +1,1 @@
+Code based on W3Schools JavaScript Projects: https://www.w3schools.com/js/js_project_counter.asp
