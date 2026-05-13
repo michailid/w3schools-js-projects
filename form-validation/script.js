@@ -38,9 +38,13 @@ function validateEmail() {
 }
 
 function validatePassword() {
-  let value = passwordInput.value;
-  if (value.length < 8) {
+  let password = passwordInput.value;
+  if (password.length < 8) {
     showError(passwordError, "Password must be at least 8 characters.");
+    return false;
+  }
+  if (!/\d/.test(password)) {
+    showError(passwordError, "Password must contain at least 1 number.");
     return false;
   }
   clearError(passwordError);
@@ -51,7 +55,7 @@ function validateConfirmPassword() {
   let confirmPassword = confirmPasswordInput.value;
   let password = passwordInput.value;
   if (confirmPassword == "") {
-    showError(confirmPasswordError, "Please confirm your password.")
+    showError(confirmPasswordError, "Please confirm your password.");
     return false;
   }
   if (confirmPassword !== password) {
@@ -65,14 +69,10 @@ function validateConfirmPassword() {
   return true;
 }
 
-function validateForm() {
-  let okName = validateName();
-  let okEmail = validateEmail();
-  let okPassword = validatePassword();
-  let okConfirmPassword = validateConfirmPassword();
-
-  return okName && okEmail && okPassword && okConfirmPassword;
-}
+nameInput.addEventListener("input", validateName);
+emailInput.addEventListener("input", validateEmail);
+passwordInput.addEventListener("input", validatePassword);
+confirmPasswordInput.addEventListener("input", validateConfirmPassword);
 
 form.setAttribute("novalidate", true);
 form.addEventListener("submit", (e) => {
@@ -81,7 +81,13 @@ form.addEventListener("submit", (e) => {
   // clear result
   result.innerHTML = "";
 
-  if (validateForm()) {
+  let isValid =
+    validateName() &&
+    validateEmail() &&
+    validatePassword() &&
+    validateConfirmPassword();
+
+  if (isValid) {
     result.innerHTML = "Form is valid.";
     result.className = "ok";
   } else {
