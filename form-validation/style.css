@@ -83,3 +83,19 @@ button[type="submit"]:hover {
 .hidden {
   display: none;
 }
+
+#password-strength-indicator {
+  font-size: 14px;
+}
+
+.weak {
+  color: red;
+}
+
+.medium {
+  color: orange;
+}
+
+.strong {
+  color: green;
+}

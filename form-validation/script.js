@@ -17,6 +17,39 @@ function clearError(element) {
   element.innerHTML = "";
 }
 
+/**
+ * A password is weak if it has only lowercase
+ * letters and only one number.
+ *
+ * @param {*} password
+ * @returns
+ */
+function isWeak(password) {
+  return /^(?=.*[a-z])([a-z]*\d[a-z]*)$/.test(password);
+}
+
+/**
+ * A password is medium if it is neither weak nor strong.
+ * 
+ * @param {*} password 
+ * @returns 
+ */
+function isMedium(password) {
+  return !isWeak(password) && !isStrong(password);
+}
+
+/**
+ * A password is strong if it has at least one lowercase letter,
+ * at least one uppercase letter, at least one number and at
+ * least one symbol.
+ *
+ * @param {*} password
+ * @returns
+ */
+function isStrong(password) {
+  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d])/.test(password);
+}
+
 function validateName() {
   let value = nameInput.value.trim();
   const validAnnotation = nameInput.nextElementSibling;
@@ -46,17 +79,34 @@ function validateEmail() {
 function validatePassword() {
   let password = passwordInput.value;
   const validAnnotation = passwordInput.nextElementSibling;
+  const passwordStrengthIndicator = document.getElementById(
+    "password-strength-indicator",
+  );
   if (password.length < 8) {
+    passwordStrengthIndicator.className = "hidden";
     validAnnotation.classList.add("hidden");
     showError(passwordError, "Password must be at least 8 characters.");
     return false;
   }
   if (!/\d/.test(password)) {
+    passwordStrengthIndicator.className = "hidden";
     showError(passwordError, "Password must contain at least 1 number.");
     return false;
   }
+
   clearError(passwordError);
+
+  // check password strength
+  if (isWeak(password)) {
+    passwordStrengthIndicator.className = "weak";
+  } else if (isMedium(password)) {
+    passwordStrengthIndicator.className = "medium";
+  } else if (isStrong(password)) {
+    passwordStrengthIndicator.className = "strong";
+  }
+
   validAnnotation.classList.remove("hidden");
+
   return true;
 }
 
