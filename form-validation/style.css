@@ -32,8 +32,7 @@ body {
 }
 
 .field {
-  display: flex;
-  flex-direction: column;
+  position: relative;
   margin-top: 10px;
   margin-bottom: 10px;
   width: 100%;
@@ -47,6 +46,7 @@ body {
   padding: 5px;
   font-size: 15px;
   margin-top: 3px;
+  width: 92%;
 }
 
 button[type="submit"] {
@@ -71,4 +71,15 @@ button[type="submit"]:hover {
 
 .ok {
   color: green;
+}
+
+.valid-annotation {
+  color: rgb(0, 204, 0);
+  position: absolute;
+  right: 0;
+  top: 50%;
+}
+
+.hidden {
+  display: none;
 }

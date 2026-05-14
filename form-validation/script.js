@@ -19,27 +19,35 @@ function clearError(element) {
 
 function validateName() {
   let value = nameInput.value.trim();
+  const validAnnotation = nameInput.nextElementSibling;
   if (value.length < 2) {
+    validAnnotation.classList.add("hidden");
     showError(nameError, "Name must be at least 2 characters.");
     return false;
   }
   clearError(nameError);
+  validAnnotation.classList.remove("hidden");
   return true;
 }
 
 function validateEmail() {
   let value = emailInput.value.trim();
+  const validAnnotation = emailInput.nextElementSibling;
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+    validAnnotation.classList.add("hidden");
     showError(emailError, "Enter a valid email address.");
     return false;
   }
   clearError(emailError);
+  validAnnotation.classList.remove("hidden");
   return true;
 }
 
 function validatePassword() {
   let password = passwordInput.value;
+  const validAnnotation = passwordInput.nextElementSibling;
   if (password.length < 8) {
+    validAnnotation.classList.add("hidden");
     showError(passwordError, "Password must be at least 8 characters.");
     return false;
   }
@@ -48,17 +56,21 @@ function validatePassword() {
     return false;
   }
   clearError(passwordError);
+  validAnnotation.classList.remove("hidden");
   return true;
 }
 
 function validateConfirmPassword() {
   let confirmPassword = confirmPasswordInput.value;
   let password = passwordInput.value;
+  const validAnnotation = confirmPasswordInput.nextElementSibling;
   if (confirmPassword == "") {
+    validAnnotation.classList.add("hidden");
     showError(confirmPasswordError, "Please confirm your password.");
     return false;
   }
   if (confirmPassword !== password) {
+    validAnnotation.classList.add("hidden");
     showError(
       confirmPasswordError,
       "Password and confirm password should match.",
@@ -66,6 +78,7 @@ function validateConfirmPassword() {
     return false;
   }
   clearError(confirmPasswordError);
+  validAnnotation.classList.remove("hidden");
   return true;
 }
 
@@ -77,8 +90,6 @@ confirmPasswordInput.addEventListener("input", validateConfirmPassword);
 form.setAttribute("novalidate", true);
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-
-  // clear result
   result.innerHTML = "";
 
   let isValid =
@@ -86,7 +97,6 @@ form.addEventListener("submit", (e) => {
     validateEmail() &&
     validatePassword() &&
     validateConfirmPassword();
-
   if (isValid) {
     result.innerHTML = "Form is valid.";
     result.className = "ok";
