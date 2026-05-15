@@ -64,6 +64,10 @@ button[type="submit"]:hover {
   background-color: rgb(176, 30, 30);
 }
 
+button[type="submit"][disabled] {
+  background-color: rgb(210, 150, 150);
+}
+
 .error {
   color: red;
   font-size: 14px;

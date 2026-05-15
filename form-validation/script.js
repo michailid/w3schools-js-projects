@@ -142,8 +142,8 @@ passwordInput.addEventListener("input", validatePassword);
 confirmPasswordInput.addEventListener("input", validateConfirmPassword);
 
 form.setAttribute("novalidate", true);
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
+submitBtn.setAttribute("disabled", "");
+form.addEventListener("input", () => {
   result.innerHTML = "";
 
   let isValid =
@@ -152,11 +152,16 @@ form.addEventListener("submit", (e) => {
     validatePassword() &&
     validateConfirmPassword();
   if (isValid) {
-    result.innerHTML = "Form is valid.";
-    result.className = "ok";
+    submitBtn.removeAttribute("disabled");
   } else {
     result.innerHTML = "Please fix the errors.";
     result.className = "error";
+    submitBtn.disabled = true;
   }
-  submitBtn.toggleAttribute("disabled", !isValid);
+});
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  result.innerHTML = "Form is valid.";
+  result.className = "ok";
 });
