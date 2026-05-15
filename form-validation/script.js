@@ -8,6 +8,10 @@ const emailError = document.getElementById("email-error");
 const passwordError = document.getElementById("password-error");
 const confirmPasswordError = document.getElementById("confirm-password-error");
 const result = document.getElementById("result");
+const submitBtn = document.getElementById("submit-btn");
+const passwordStrengthIndicator = document.getElementById(
+  "password-strength-indicator",
+);
 
 function showError(element, message) {
   element.innerHTML = message;
@@ -30,9 +34,9 @@ function isWeak(password) {
 
 /**
  * A password is medium if it is neither weak nor strong.
- * 
- * @param {*} password 
- * @returns 
+ *
+ * @param {*} password
+ * @returns
  */
 function isMedium(password) {
   return !isWeak(password) && !isStrong(password);
@@ -79,9 +83,6 @@ function validateEmail() {
 function validatePassword() {
   let password = passwordInput.value;
   const validAnnotation = passwordInput.nextElementSibling;
-  const passwordStrengthIndicator = document.getElementById(
-    "password-strength-indicator",
-  );
   if (password.length < 8) {
     passwordStrengthIndicator.className = "hidden";
     validAnnotation.classList.add("hidden");
@@ -99,10 +100,13 @@ function validatePassword() {
   // check password strength
   if (isWeak(password)) {
     passwordStrengthIndicator.className = "weak";
+    passwordStrengthIndicator.innerText = "Weak";
   } else if (isMedium(password)) {
     passwordStrengthIndicator.className = "medium";
+    passwordStrengthIndicator.innerText = "Medium";
   } else if (isStrong(password)) {
     passwordStrengthIndicator.className = "strong";
+    passwordStrengthIndicator.innerText = "Strong";
   }
 
   validAnnotation.classList.remove("hidden");
@@ -154,4 +158,5 @@ form.addEventListener("submit", (e) => {
     result.innerHTML = "Please fix the errors.";
     result.className = "error";
   }
+  submitBtn.toggleAttribute("disabled", !isValid);
 });
