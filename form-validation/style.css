@@ -46,7 +46,15 @@ body {
   padding: 5px;
   font-size: 15px;
   margin-top: 3px;
-  width: 92%;
+  width: 75%;
+}
+
+.password-visibility-btn {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 28px;
+  right: 30px;
 }
 
 button[type="submit"] {

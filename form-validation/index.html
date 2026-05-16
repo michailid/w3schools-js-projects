@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Form Validation</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
   </head>
   <body>
     <form id="form">
@@ -24,6 +28,9 @@
       <div class="field">
         <label>Password:</label>
         <input type="password" id="password" />
+        <button class="password-visibility-btn">
+          <i class="fa fa-eye"></i>
+        </button>
         <p class="valid-annotation hidden">&#10004;</p>
         <p class="error" id="password-error"></p>
         <p id="password-strength-indicator" class="hidden"></p>
@@ -31,6 +38,9 @@
       <div class="field">
         <label>Confirm Password:</label>
         <input type="password" id="confirm-password" />
+        <button class="password-visibility-btn">
+          <i class="fa fa-eye"></i>
+        </button>
         <p class="valid-annotation hidden">&#10004;</p>
         <p class="error" id="confirm-password-error"></p>
       </div>

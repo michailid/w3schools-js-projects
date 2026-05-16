@@ -12,6 +12,12 @@ const submitBtn = document.getElementById("submit-btn");
 const passwordStrengthIndicator = document.getElementById(
   "password-strength-indicator",
 );
+const passwordVisibilityBtn = document.querySelector(
+  "#password + .password-visibility-btn",
+);
+const confirmPasswordVisibilityBtn = document.querySelector(
+  "#confirm-password + .password-visibility-btn",
+);
 
 function showError(element, message) {
   element.innerHTML = message;
@@ -82,7 +88,7 @@ function validateEmail() {
 
 function validatePassword() {
   let password = passwordInput.value;
-  const validAnnotation = passwordInput.nextElementSibling;
+  const validAnnotation = passwordInput.nextElementSibling.nextElementSibling;
   if (password.length < 8) {
     passwordStrengthIndicator.className = "hidden";
     validAnnotation.classList.add("hidden");
@@ -117,7 +123,7 @@ function validatePassword() {
 function validateConfirmPassword() {
   let confirmPassword = confirmPasswordInput.value;
   let password = passwordInput.value;
-  const validAnnotation = confirmPasswordInput.nextElementSibling;
+  const validAnnotation = confirmPasswordInput.nextElementSibling.nextElementSibling;
   if (confirmPassword == "") {
     validAnnotation.classList.add("hidden");
     showError(confirmPasswordError, "Please confirm your password.");
@@ -164,4 +170,24 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   result.innerHTML = "Form is valid.";
   result.className = "ok";
+});
+
+passwordVisibilityBtn.addEventListener('click', () => {
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    passwordVisibilityBtn.innerHTML = '<i class="fa fa-eye-slash"></i>';
+  } else {
+    passwordInput.type = 'password';
+    passwordVisibilityBtn.innerHTML = '<i class="fa fa-eye"></i>';
+  }
+});
+
+confirmPasswordVisibilityBtn.addEventListener('click', () => {
+  if (confirmPasswordInput.type === 'password') {
+    confirmPasswordInput.type = 'text';
+    confirmPasswordVisibilityBtn.innerHTML = '<i class="fa fa-eye-slash"></i>';
+  } else {
+    confirmPasswordInput.type = 'password';
+    confirmPasswordVisibilityBtn.innerHTML = '<i class="fa fa-eye"></i>';
+  }
 });
