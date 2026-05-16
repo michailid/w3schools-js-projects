@@ -160,7 +160,7 @@ form.addEventListener("input", () => {
   if (isValid) {
     submitBtn.removeAttribute("disabled");
   } else {
-    result.innerHTML = "Please fix the errors.";
+    result.innerText = "Please fix the errors.";
     result.className = "error";
     submitBtn.disabled = true;
   }
@@ -168,26 +168,26 @@ form.addEventListener("input", () => {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  result.innerHTML = "Form is valid.";
+  result.innerText = "Form is valid.";
   result.className = "ok";
 });
 
 passwordVisibilityBtn.addEventListener('click', () => {
   if (passwordInput.type === 'password') {
     passwordInput.type = 'text';
-    passwordVisibilityBtn.innerHTML = '<i class="fa fa-eye-slash"></i>';
+    passwordVisibilityBtn.innerHTML = '<i class="fa fa-eye"></i>';
   } else {
     passwordInput.type = 'password';
-    passwordVisibilityBtn.innerHTML = '<i class="fa fa-eye"></i>';
+    passwordVisibilityBtn.innerHTML = '<i class="fa fa-eye-slash"></i>';
   }
 });
 
 confirmPasswordVisibilityBtn.addEventListener('click', () => {
   if (confirmPasswordInput.type === 'password') {
     confirmPasswordInput.type = 'text';
-    confirmPasswordVisibilityBtn.innerHTML = '<i class="fa fa-eye-slash"></i>';
+    confirmPasswordVisibilityBtn.innerHTML = '<i class="fa fa-eye"></i>';
   } else {
     confirmPasswordInput.type = 'password';
-    confirmPasswordVisibilityBtn.innerHTML = '<i class="fa fa-eye"></i>';
+    confirmPasswordVisibilityBtn.innerHTML = '<i class="fa fa-eye-slash"></i>';
   }
 });
